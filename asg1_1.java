@@ -15,13 +15,18 @@ class RadixSort {
     }
 
     // use counting sort to sort the elements based on significant places
-    void countingSort(int array[], int place) {
+    void countingSort(int array[], int place, int identify[]) {
 
         // get array size length
         int size = array.length;
 
         // declare output array
         int[] output = new int[size];
+
+        // int[] identify = new int[10];
+        // for (int i = 0; i < 10; i++) {
+        //     identify[i] = i;
+        // }
 
         // declare count array to count occurence of each digit in array (0-9)
         int[] count = new int[10];
@@ -32,7 +37,13 @@ class RadixSort {
 
         // calculate occurences of each numbers in array
         for (int i = 0; i < size; i++){
-            count[(array[i] / place) % 10]++;
+            int exact_num = (array[i] / place) % 10;
+            for(int j = 0; j < 10;j++){
+                if(exact_num==j){
+                    count[j]++;
+                }
+            }
+            //count[(array[i] / place) % 10]++;
         }
 
         //System.out.println(Arrays.toString(count));
@@ -69,10 +80,20 @@ class RadixSort {
     
     // to declare array 1 and array 2
     int cnt = 0;
+    int[] arr1 = {0,1,2,3,4,5,6,7,8,9};
+    int[] arr2 = {0,1,2,3,4,5,6,7,8,9};
     // apply counting sort to sort elements based on place value.
     for (int place = 1; max / place > 0; place *= 10){
-        System.out.println("Array " + ((cnt % 2) + 1));
-        countingSort(array, place);
+        //System.out.println("Array " + ((cnt % 2) + 1));
+        if(cnt%2==0){
+            countingSort(array, place, arr1);
+            System.out.println("Using Array 1!");
+        }
+        else{
+            countingSort(array, place, arr2);
+            System.out.println("Using Array 2!");
+        }
+        //countingSort(array, place, arr1);
         cnt ++;
         System.out.println(Arrays.toString(array));
     }
