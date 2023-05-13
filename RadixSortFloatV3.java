@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Scanner;  
 public class RadixSortV3 {
 
     private static int getMax(int[] input_arr) {
@@ -72,28 +73,14 @@ public class RadixSortV3 {
         // System.out.println(output);
     }
 
-    public static void radixSort(float[] arr) {
+    public static void radixSort(int[] arr) {
 
         if (arr == null || arr.length == 0) {
             return;
         }
-        int mostSf = 0;
-        for (int i = 0; i < arr.length; i++) {
-          String[] parts = Float.toString(arr[i]).split("\\.");
-          int decPlaces = parts.length > 1 ? parts[1].length() : 0;
-          if (decPlaces > mostSf) {
-            mostSf = decPlaces;
-          }
-    
-        }
-        int []intArray=new int [arr.length];
-    
-        for (int i = 0; i < arr.length; i++) {
-          arr[i]=(float)(arr[i] * Math.pow(10, mostSf));
-          intArray[i]=Math.round(arr[i]);
-        }
+
         // Find maximum number to know number of digits
-        int max = getMax(intArray);
+        int max = getMax(arr);
 
         ArrayList<Integer>[] array1 = (ArrayList<Integer>[]) new ArrayList[10];
         ArrayList<Integer>[] array2 = (ArrayList<Integer>[]) new ArrayList[10];
@@ -110,14 +97,14 @@ public class RadixSortV3 {
         for (int exp = 1; max / exp > 0; exp *= 10) {
             if (cnt % 2 == 0) {
                 System.out.println("Using Array 1!");
-                comparisonSort(intArray, exp, array1, bucket);
+                comparisonSort(arr, exp, array1, bucket);
                 System.out.println("Array 2: ");
                 System.out.print(Arrays.toString(array2));
                 System.out.println("");
                 System.out.println("");
             } else {
                 System.out.println("Using Array 2!");
-                comparisonSort(intArray, exp, array2, bucket);
+                comparisonSort(arr, exp, array2, bucket);
                 System.out.println("Array 1: ");
                 System.out.print(Arrays.toString(array1));
                 System.out.println("");
@@ -127,18 +114,37 @@ public class RadixSortV3 {
             cnt++;
             //System.out.println(Arrays.toString(arr));
         }
-        int i=0;
-        for (float value: intArray) {
-      value = (float)(value / Math.pow(10, mostSf));
-      arr[i]=value;
-      i++;
-    }
     }
 
     public static void main(String[] args) {
 
-        float[] data = {275.0f,87.3f,426.3f,61.34f,409.8f,170.3f,677.45f,503.32f};
+        int data[];
+        String temp;
+        int arrSize=1;
+        Scanner myObj = new Scanner(System.in); 
+        boolean containsOnlyDigits=false;
+        while (containsOnlyDigits==false){
+            containsOnlyDigits=true;
+        System.out.println("Enter array size");
+        temp = myObj.nextLine();
+            for (int i = 0; i < temp.length(); i++) {
+      if (!Character.isDigit(temp.charAt(i))) { // in case that a char is NOT a digit, enter to the if code block
+        containsOnlyDigits = false;
+      }
+    }
 
+    if (containsOnlyDigits) {
+      arrSize=Integer.parseInt(temp);
+      System.out.println("Array size is "+ arrSize);
+    } else {
+      System.out.println("Please input a number!");
+      System.out.println();
+    }
+        }
+        data= new int[arrSize];
+        for (int i=0; i<arrSize;i++){
+            data[i]=ThreadLocalRandom.current().nextInt(1, 100000 + 1);
+        }
         RadixSortV3.radixSort(data);
 
         System.out.println("");
