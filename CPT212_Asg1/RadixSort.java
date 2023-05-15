@@ -3,6 +3,8 @@ package CPT212_Asg1;
 // import ArrayList and Arrays
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RadixSort {
 
@@ -117,9 +119,50 @@ public class RadixSort {
     public static void main(String[] args) {
 
         // initialize input data
-        int[] data = { 275, 87, 426, 61, 409, 170, 677, 503 };
+        // int[] data = { 275, 87, 426, 61, 409, 17012, 677, 503 };
 
-        // data passed to fucntion to be sorted
+        // // data passed to fucntion to be sorted
+        // RadixSort.radixSort(data);
+
+        // System.out.println("");
+        // System.out.println("Sorted List: ");
+        // System.out.print(Arrays.toString(data));
+        int data[];
+        String temp;
+        int arrSize=1;
+        try (Scanner myObj = new Scanner(System.in)) {
+            boolean containsOnlyDigits=false;
+            while (containsOnlyDigits==false){
+                containsOnlyDigits=true;
+            System.out.println("Enter array size : ");
+            temp = myObj.nextLine();
+                for (int i = 0; i < temp.length(); i++) {
+     if (!Character.isDigit(temp.charAt(i))) { // in case that a char is NOT a digit, enter to the if code block
+            containsOnlyDigits = false;
+     }
+   }
+
+   if (containsOnlyDigits) {
+     arrSize=Integer.parseInt(temp);
+    //  System.out.println("Array size is "+ arrSize);
+   } else {
+     System.out.println("Please input a number!");
+     System.out.println();
+   }
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } 
+        data = new int[arrSize];
+        for (int i=0; i<arrSize;i++){
+            data[i]=ThreadLocalRandom.current().nextInt(1, 100000 + 1);
+        }
+        System.out.println("");
+        System.out.println("Original List: ");
+        System.out.print(Arrays.toString(data));
+        System.out.println("");
+        
+        System.out.println("");
         RadixSort.radixSort(data);
 
         System.out.println("");
