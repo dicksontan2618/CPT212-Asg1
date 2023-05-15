@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Scanner;  
 public class RadixSortV3 {
 
     private static int getMax(int[] input_arr) {
@@ -117,8 +118,33 @@ public class RadixSortV3 {
 
     public static void main(String[] args) {
 
-        int[] data = {275,87,426,61,409,170,677,503};
+        int data[];
+        String temp;
+        int arrSize=1;
+        Scanner myObj = new Scanner(System.in); 
+        boolean containsOnlyDigits=false;
+        while (containsOnlyDigits==false){
+            containsOnlyDigits=true;
+        System.out.println("Enter array size");
+        temp = myObj.nextLine();
+            for (int i = 0; i < temp.length(); i++) {
+      if (!Character.isDigit(temp.charAt(i))) { // in case that a char is NOT a digit, enter to the if code block
+        containsOnlyDigits = false;
+      }
+    }
 
+    if (containsOnlyDigits) {
+      arrSize=Integer.parseInt(temp);
+      System.out.println("Array size is "+ arrSize);
+    } else {
+      System.out.println("Please input a number!");
+      System.out.println();
+    }
+        }
+        data= new int[arrSize];
+        for (int i=0; i<arrSize;i++){
+            data[i]=ThreadLocalRandom.current().nextInt(1, 100000 + 1);
+        }
         RadixSortV3.radixSort(data);
 
         System.out.println("");
