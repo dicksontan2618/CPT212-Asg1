@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.Scanner;  
+
 public class RadixSortV3 {
 
     private static int getMax(int[] input_arr) {
+        
         // Find maximum number to know number of digits
         int max = input_arr[0];
         for (int i = 1; i < input_arr.length; i++) {
@@ -19,7 +21,7 @@ public class RadixSortV3 {
     private static void comparisonSort(int[] input_arr, int exp, ArrayList<Integer>[] temp, ArrayList<Integer> bucket) {
 
         int n = input_arr.length;
-        
+
         for (int i = 0; i < 10; i++) {
             temp[i].clear();
         }
@@ -73,14 +75,28 @@ public class RadixSortV3 {
         // System.out.println(output);
     }
 
-    public static void radixSort(int[] arr) {
+    public static void radixSort(float[] arr) {
 
         if (arr == null || arr.length == 0) {
             return;
         }
+        int mostSf = 0;
+        for (int i = 0; i < arr.length; i++) {
+          String[] parts = Float.toString(arr[i]).split("\\.");
+          int decPlaces = parts.length > 1 ? parts[1].length() : 0;
+          if (decPlaces > mostSf) {
+            mostSf = decPlaces;
+          }
 
+        }
+        int []intArray=new int [arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+          arr[i]=(float)(arr[i] * Math.pow(10, mostSf));
+          intArray[i]=Math.round(arr[i]);
+        }
         // Find maximum number to know number of digits
-        int max = getMax(arr);
+        int max = getMax(intArray);
 
         ArrayList<Integer>[] array1 = (ArrayList<Integer>[]) new ArrayList[10];
         ArrayList<Integer>[] array2 = (ArrayList<Integer>[]) new ArrayList[10];
@@ -93,18 +109,18 @@ public class RadixSortV3 {
         }
 
         int cnt = 0;
-        
+
         for (int exp = 1; max / exp > 0; exp *= 10) {
             if (cnt % 2 == 0) {
                 System.out.println("Using Array 1!");
-                comparisonSort(arr, exp, array1, bucket);
+                comparisonSort(intArray, exp, array1, bucket);
                 System.out.println("Array 2: ");
                 System.out.print(Arrays.toString(array2));
                 System.out.println("");
                 System.out.println("");
             } else {
                 System.out.println("Using Array 2!");
-                comparisonSort(arr, exp, array2, bucket);
+                comparisonSort(intArray, exp, array2, bucket);
                 System.out.println("Array 1: ");
                 System.out.print(Arrays.toString(array1));
                 System.out.println("");
@@ -114,11 +130,18 @@ public class RadixSortV3 {
             cnt++;
             //System.out.println(Arrays.toString(arr));
         }
+        int i=0;
+        for (float value: intArray) {
+      value = (float)(value / Math.pow(10, mostSf));
+      arr[i]=value;
+      i++;
+    }
     }
 
     public static void main(String[] args) {
 
-        int data[];
+
+        float data[];
         String temp;
         int arrSize=1;
         Scanner myObj = new Scanner(System.in); 
@@ -141,10 +164,11 @@ public class RadixSortV3 {
       System.out.println();
     }
         }
-        data= new int[arrSize];
+        data= new float[arrSize];
         for (int i=0; i<arrSize;i++){
-            data[i]=ThreadLocalRandom.current().nextInt(1, 100000 + 1);
+            data[i]=(float)ThreadLocalRandom.current().nextInt(1, 10000000 + 1)/100;
         }
+        
         RadixSortV3.radixSort(data);
 
         System.out.println("");
