@@ -295,7 +295,7 @@ public class RadixSortQ1Counter {
  
          // pass original array to radix sort algorithm
          System.out.println("");
-         RadixSortCounter.radixSort(data);
+         RadixSortQ1Counter.radixSort(data);
  
          // show sorted array
          System.out.println("");

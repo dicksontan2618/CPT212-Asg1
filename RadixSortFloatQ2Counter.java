@@ -309,8 +309,14 @@ public static void main(String[] args) {
         data[i] = (float) ThreadLocalRandom.current().nextInt(1, 10000000 + 1) / 100;
     }
 
+    System.out.println("");
+    System.out.println("Original List: ");
+    System.out.print(Arrays.toString(data));
+    System.out.println("");
+
     // Perform radix sort on the array
-    RadixSortFloatCounter.radixSort(data);
+    System.out.println("");
+    RadixSortFloatQ2Counter.radixSort(data);
 
     System.out.println("");
     System.out.println("Sorted List: ");
