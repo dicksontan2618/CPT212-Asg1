@@ -11,6 +11,8 @@ public class RadixSortCounter {
     // call function
     public static void radixSort(int[] arr) {
         
+        long startTime = System.currentTimeMillis();
+
         int counter = 0;
         
         // check if input array is empty
@@ -231,6 +233,13 @@ public class RadixSortCounter {
             counter += 2; //increment and assignment for place
         }
         counter += 2; // last max / place > 0 comparison and / arithmetic                 operation
+
+        long endTime = System.currentTimeMillis();
+        long elapsed = endTime - startTime;
+        System.out.print("Running Time: ");
+        System.out.print(elapsed);
+        System.out.println("");
+
         System.out.print("Counter: ");
         System.out.print(counter);
         System.out.println("");
