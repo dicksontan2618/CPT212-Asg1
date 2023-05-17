@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RadixSortFloatCounter {
+public class RadixSortFloatQ2Counter {
 
     public static void radixSort(float[] arr) {
 
