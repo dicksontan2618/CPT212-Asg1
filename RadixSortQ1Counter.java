@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RadixSortCounter {
+public class RadixSortQ1Counter {
 
     // call function
     public static void radixSort(int[] arr) {
