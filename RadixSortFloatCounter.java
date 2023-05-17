@@ -7,6 +7,8 @@ public class RadixSortFloatCounter {
 
     public static void radixSort(float[] arr) {
 
+        long startTime = System.currentTimeMillis();
+
         int counter = 0;
 
         if (arr == null || arr.length == 0) {
@@ -257,12 +259,20 @@ public class RadixSortFloatCounter {
     }
     counter += 1; // last intArray iteration
 
+    long endTime = System.currentTimeMillis();
+    long elapsed = endTime - startTime;
+    System.out.print("Running Time: ");
+    System.out.print(elapsed);
+    System.out.println("");
+
     System.out.print("Counter: ");
         System.out.print(counter);
         System.out.println("");
+
 }
 
 public static void main(String[] args) {
+
     float data[];
     String temp;
     int arrSize = 1;
@@ -305,5 +315,6 @@ public static void main(String[] args) {
     System.out.println("");
     System.out.println("Sorted List: ");
     System.out.print(Arrays.toString(data));
+
 }
 }
