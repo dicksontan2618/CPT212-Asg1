@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RadixSortV3 {
+public class RadixSortFloatQ2 {
 
     // Find the maximum number in the array to determine the number of digits
     private static int getMax(int[] input_arr) {
@@ -163,7 +163,7 @@ public static void main(String[] args) {
     }
 
     // Perform radix sort on the array
-    RadixSortV3.radixSort(data);
+    RadixSortFloatQ2.radixSort(data);
 
     System.out.println("");
     System.out.println("Sorted List: ");
